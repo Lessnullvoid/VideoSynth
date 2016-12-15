@@ -1,0 +1,33 @@
+<Parameters>
+	<countX>44</countX>
+	<stepX>5</stepX>
+	<twistX>-45</twistX>
+<Parameters/>
+	<Global>
+		<Scale>0.683673</Scale>
+		<Rotate>-121.224</Rotate>
+		<Background>0</Background>
+	</Global>
+<primitive>
+		<shiftY>1000</shiftY>
+		<rotate>-62.449</rotate>
+		<size>0.424823, 0.528946</size>
+		<color>0, 255, 228, 90</color>
+		<filled>0</filled>
+		<type>0</type>
+	</primitive>
+<countY>50</countY>
+	<stepY>0</stepY>
+	<twistY>-30</twistY>
+	<pinchy>1</pinchy>
+<Mixer>
+		<image>0</image>
+		<video>0</video>
+		<camera>0</camera>
+	<kenable>0</kenable>
+		<ksectors>56</ksectors>
+		<kangle>-1496.94</kangle>
+		<kx>0.19898</kx>
+		<ky>0.566327</ky>
+	</Mixer>
+</Parameters>
