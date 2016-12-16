@@ -65,11 +65,36 @@ class ofApp : public ofBaseApp{
     //---------------------------------Offscreen buffer
     
     ofFbo fbo;
-    
     ofShader shader;
     ofxToggle kenabled;
     ofxIntSlider ksectors;
     ofxFloatSlider kangle, kx, ky;
+    
+    //----------------------------------3D objects
+    
+    ofSpherePrimitive sphere;
+    ofEasyCam cam;
+    ofLight light;
+    ofMaterial material;
+    
+    // ----------------------------------Texture
+    ofFbo fbo2;
+    
+    //-------------------------------------2d/3d mixer
+
+    ofxFloatSlider show2d, show3d;
+    ofFbo fbo3d;
+    ofxFloatSlider rad, deform, deformFreq, extrude;
+    vector<ofPoint> vertices0;
+    
+    
+    
+    
+    
+    
+    
+    
+
     
   
     
