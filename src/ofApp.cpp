@@ -76,11 +76,11 @@ void ofApp::setup(){
     //------ Loading shaders, pixels video ---------------------
     fbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGB );
     ofLoadImage(image, "M1.png");
-    video.load("phisy.MOV");
+    video.load("5.MOV");
     video.play();
     
     //--------3D objects-----------------------------------------
-    sphere.set(250, 20);
+    sphere.set(250, 80);
     vertices0 = sphere.getMesh().getVertices();
     fbo2.allocate( ofGetWidth(), ofGetHeight(), GL_RGB );
     float w = fbo2.getWidth();
@@ -112,7 +112,15 @@ void ofApp::update(){
         v *= rad;
         vertices[i] = v;
     }
-
+    
+    ofPixels pixels;
+    fbo2.readToPixels(pixels);
+    for (int i=0; i<vertices.size(); i++) {
+        ofVec2f t = sphere.getMesh().getTexCoords()[i];
+        t.x = ofClamp( t.x, 0, pixels.getWidth()-1 );
+        t.y = ofClamp( t.y, 0, pixels.getHeight()-1 );
+        float br = pixels.getColor(t.x, t.y).getBrightness(); vertices[i] *= 1 + br / 255.0 * extrude;
+    }
 }
 
 
