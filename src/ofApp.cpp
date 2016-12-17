@@ -76,7 +76,7 @@ void ofApp::setup(){
     //------ Loading shaders, pixels video ---------------------
     fbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGB );
     ofLoadImage(image, "M1.png");
-    video.load("5.MOV");
+    video.load("SpaceDataandNoise.mp4");
     video.play();
     
     //--------3D objects-----------------------------------------
@@ -99,6 +99,7 @@ void ofApp::update(){
     video.update();
     if (camera.isInitialized() ) camera.update();
     
+    //----------Chanche sphere vertices----------------------
     vector<ofPoint> &vertices = sphere.getMesh().getVertices();
     for (int i=0; i<vertices.size(); i++) {
         ofPoint v = vertices0[i];
@@ -113,6 +114,8 @@ void ofApp::update(){
         vertices[i] = v;
     }
     
+    
+    //-------Extruding sphere--------------------------------------
     ofPixels pixels;
     fbo2.readToPixels(pixels);
     for (int i=0; i<vertices.size(); i++) {
@@ -121,6 +124,19 @@ void ofApp::update(){
         t.y = ofClamp( t.y, 0, pixels.getHeight()-1 );
         float br = pixels.getColor(t.x, t.y).getBrightness(); vertices[i] *= 1 + br / 255.0 * extrude;
     }
+    
+    //-------Time-----------------------------------------------
+    kangle = ofGetElapsedTimef();
+    
+   
+    //--------Simple LFO-----------------------------------------
+    float phase = 0.1 * ofGetElapsedTimef() * M_TWO_PI;
+    float value = sin ( phase );
+    kx = ofMap ( value, -1, 1, 0.45, 0.55);
+    
+    //--------Perlin Noise --------------------------------------
+    float phase1 = 0.2 * ofGetElapsedTimef();
+    deform = ofNoise( phase1 );
 }
 
 
@@ -253,6 +269,7 @@ void ofApp::draw2d(){
     
     matrixPattern();
     ofPopMatrix();
+    
 }
 
 //--------------------------------------------------------------
